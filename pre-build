@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
-APP="$1"; IMAGE="$2";HOSTNAME=$(hostname -f);
+APP="$1"; IMAGE="$2";HOSTNAME=$(cat $DOKKU_ROOT/VHOST);
 echo "-----> Notifying Hipchat ..."
-echo "Starting Build for $APP on $HOSTNAME" | HIPCHAT_COLOR=yellow $PLUGIN_PATH/hipchat/hipchat >/dev/null
+echo "Starting Build for $APP.$HOSTNAME" | HIPCHAT_COLOR=yellow $PLUGIN_PATH/hipchat/hipchat >/dev/null
