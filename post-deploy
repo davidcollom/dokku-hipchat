@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 APP="$1"; IMAGE="$2";HOSTNAME=$(cat $DOKKU_ROOT/VHOST);
+PLUGIN_DIR=$(dirname $0)
+ENV_FILE=$DOKKU_ROOT/$APP/ENV
+
+if [[ -f "$ENV_FILE" ]]; then
+  . $ENV_FILE
+  cat $ENV_FILE
+fi
+
 echo "-----> Notifying Hipchat ..."
-echo "Deployed <a href=\"http://$APP.$HOSTNAME\">$APP ($HOSTNAME)</a>" | HIPCHAT_COLOR=green $PLUGIN_PATH/hipchat/hipchat >/dev/null
+echo "Deployed <a href=\"http://$APP.$HOSTNAME\">$APP ($HOSTNAME)</a>" | HIPCHAT_COLOR=green $PLUGIN_DIR/hipchat >/dev/null
