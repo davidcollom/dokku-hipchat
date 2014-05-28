@@ -6,7 +6,6 @@ ENV_FILE=$DOKKU_ROOT/$APP/ENV
 
 if [[ -f "$ENV_FILE" ]]; then
   . $ENV_FILE
-  cat $ENV_FILE
 fi
 
 echo "-----> Notifying Hipchat ..."
