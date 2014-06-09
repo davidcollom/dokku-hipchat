@@ -8,5 +8,10 @@ if [[ -f "$ENV_FILE" ]]; then
   . $ENV_FILE
 fi
 
+if [[ -z "$HIPCHAT_TOKEN" ]]; then
+  echo "-----> Hipchat token needs to be set "
+  exit 0
+fi
+
 echo "-----> Notifying Hipchat ..."
 echo "Starting Build for <a href=\"http://$APP.$HOSTNAME\">$APP ($HOSTNAME)</a>" | HIPCHAT_COLOR=yellow $PLUGIN_DIR/hipchat >/dev/null
